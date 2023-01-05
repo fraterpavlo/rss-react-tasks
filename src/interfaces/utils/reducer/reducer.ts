@@ -12,8 +12,8 @@ export enum EActionKind {
 }
 
 export interface IAction {
-  type: string;
-  payload: ICardsListState | Character | ESortCardsListBy | TCreateCardFormPayload | string;
+  type: EActionKind;
+  payload?: ICardsListState | Character | ESortCardsListBy | TCreateCardFormPayload | string;
 }
 
 export interface IState {

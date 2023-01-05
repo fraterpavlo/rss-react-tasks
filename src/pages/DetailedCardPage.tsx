@@ -1,24 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router';
+import Context from 'utils/contexts/homePageContext';
 import styles from 'styles/components/detailedCard.module.css';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from 'utils/reducer/reduxToolKit';
 
 function DetailedCardPage() {
   const { id } = useParams();
 
-  const state = useSelector((state: RootState): RootState => state);
+  const { state } = useContext(Context)!;
 
-  const cardData = state.main.cardsListState.data.results?.find(
-    (item) => item.id.toString() === id
-  );
+  const cardData = state.cardsListState.data.results?.find((item) => item.id.toString() === id);
 
   if (!cardData) return <strong>data not found</strong>;
 
   return (
     <>
-      <Link to="/fraterpavlo-REACT2022Q3/react-redux/">
+      <Link to="/fraterpavlo-REACT2022Q3/react-custom-app-state/">
         <button>Back</button>
       </Link>
 

@@ -1,72 +1,72 @@
 import { ESortCardsListBy, ICardsListState } from 'interfaces/pages/homePage';
-import { IAction, IState, TCreateCardFormPayload } from 'interfaces/utils/reducer/reducer';
+import {
+  EActionKind,
+  IAction,
+  IState,
+  TCreateCardFormPayload,
+} from 'interfaces/utils/reducer/reducer';
 import { Character } from 'rickmortyapi/dist/interfaces';
 import { EShowCardCount } from '../../interfaces/pages/homePage';
 
-const defaultState: IState = {
-  cardsListState: {
-    isLoaded: false,
-    data: {
-      info: {
-        count: 0,
-        pages: 1,
-        next: null,
-        prev: null,
-      },
-      results: [],
-    },
-    error: null,
-  },
-  searchInputValue: '',
-  sortBySelectValue: null,
-  showCardCountSelectValue: null,
-  createCardFormValues: null,
-};
-
-import { createSlice } from '@reduxjs/toolkit';
-
-const reducerSlice = createSlice({
-  name: 'reducerSlice',
-  initialState: defaultState,
-  reducers: {
-    setCardsListState(state: IState, action: IAction) {
-      state.cardsListState = action.payload as ICardsListState;
-    },
-    addCardToCardsListState(state: IState, action: IAction) {
-      state.cardsListState.data.results!.unshift(action.payload as Character);
-    },
-    sortCardsListState(state: IState, action: IAction) {
-      state.sortBySelectValue = action.payload as ESortCardsListBy;
-      state.cardsListState.data.results = state.cardsListState.data.results!.sort(
-        (a: Character, b: Character) =>
-          a[action.payload as ESortCardsListBy] > b[action.payload as ESortCardsListBy] ? 1 : -1
-      );
-    },
-    setSearchInputValue(state: IState, action: IAction) {
-      state.searchInputValue = action.payload as string;
-    },
-    setShowCardCount(state: IState, action: IAction) {
-      state.showCardCountSelectValue = action.payload as EShowCardCount;
-    },
-    setCreateCardFormValues(state: IState, action: IAction) {
-      state.createCardFormValues = {
-        ...state.createCardFormValues,
-        ...(action.payload as TCreateCardFormPayload),
+export default function (state: IState, action: IAction): IState {
+  switch (action.type) {
+    case EActionKind.setCardsListState:
+      return {
+        ...state,
+        cardsListState: action.payload as ICardsListState,
       };
-    },
-    resetCreateCardFormValues(state: IState) {
-      state.createCardFormValues = {};
-    },
-  },
-});
+    case EActionKind.addCardToCardsListState:
+      return {
+        ...state,
+        cardsListState: {
+          ...state.cardsListState,
+          isLoaded: true,
+          data: {
+            ...state.cardsListState.data,
+            results: [action.payload as Character, ...state.cardsListState.data.results!],
+          },
+        },
+      };
+    case EActionKind.sortCardsListState:
+      return {
+        ...state,
+        sortBySelectValue: action.payload as ESortCardsListBy,
+        cardsListState: {
+          ...state.cardsListState,
+          data: {
+            ...state.cardsListState.data,
+            results: state.cardsListState.data.results!.sort((a: Character, b: Character) =>
+              a[action.payload as ESortCardsListBy] > b[action.payload as ESortCardsListBy] ? 1 : -1
+            ),
+          },
+        },
+      };
+    case EActionKind.setSearchInputValue:
+      return {
+        ...state,
+        searchInputValue: action.payload as string,
+      };
+    case EActionKind.setShowCardCount:
+      return {
+        ...state,
+        showCardCountSelectValue: action.payload as EShowCardCount,
+      };
+    case EActionKind.setCreateCardFormValues:
+      console.log(state.createCardFormValues);
+      return {
+        ...state,
+        createCardFormValues: {
+          ...state.createCardFormValues,
+          ...(action.payload as TCreateCardFormPayload),
+        },
+      };
+    case EActionKind.resetCreateCardFormValues:
+      return {
+        ...state,
+        createCardFormValues: {},
+      };
 
-export const {
-  setCardsListState,
-  addCardToCardsListState,
-  sortCardsListState,
-  setSearchInputValue,
-  setShowCardCount,
-  setCreateCardFormValues,
-  resetCreateCardFormValues,
-} = reducerSlice.actions;
-export default reducerSlice.reducer;
+    default:
+      return state;
+  }
+}

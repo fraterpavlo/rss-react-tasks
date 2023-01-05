@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import CreateCardForm from 'components/createCardForm';
 import CardsList from 'components/cards-list';
 import '../styles/pages/home-page.css';
@@ -10,67 +10,76 @@ import { Character } from 'rickmortyapi/dist/interfaces';
 import MyModal from 'components/UI/myModal';
 import MyButton from 'components/UI/myButton';
 import MySelect from '../components/UI/mySelect';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'utils/reducer/reduxToolKit';
-import {
-  setCardsListState,
-  addCardToCardsListState,
-  sortCardsListState,
-  setSearchInputValue,
-  setShowCardCount,
-} from 'utils/reducer/reducer';
+import Context from 'utils/contexts/homePageContext';
+import { EActionKind } from 'interfaces/utils/reducer/reducer';
 
 export const HomePage = () => {
   const [isVisibleCreateFormModal, setIsVisibleCreateFormModal] = useState(false);
-  const dispatch = useDispatch();
-  const state = useSelector((state: RootState): RootState => state);
+  // const defaultСardsListStateData = {
+  //   info: {
+  //     count: 0,
+  //     pages: 1,
+  //     next: null,
+  //     prev: null,
+  //   },
+  //   results: [],
+  // };
+
+  const { dispatch, state } = useContext(Context)!;
 
   async function fetchCharactersData(filters?: CharacterFilter) {
     const characters = await getCharacters(filters);
 
     characters.status === 200
-      ? dispatch(
-          setCardsListState({
+      ? dispatch({
+          type: EActionKind.setCardsListState,
+          payload: {
             isLoaded: true,
             data: characters.data,
             error: null,
-          })
-        )
-      : dispatch(
-          setCardsListState({
+          },
+        })
+      : dispatch({
+          type: EActionKind.setCardsListState,
+          payload: {
             isLoaded: true,
-            data: state.main.cardsListState.data,
+            data: state.cardsListState.data,
             error: `ERROR! status:${characters.status}, message:${characters.statusMessage}`,
-          })
-        );
+          },
+        });
   }
 
   async function onNameSearchInput(value: string) {
-    dispatch(setSearchInputValue(value));
+    dispatch({
+      type: EActionKind.setSearchInputValue,
+      payload: value,
+    });
     await fetchCharactersData({ name: value });
   }
 
   useEffect(() => {
-    if (!state.main.cardsListState.isLoaded) fetchCharactersData();
+    if (!state.cardsListState.isLoaded) fetchCharactersData();
   }, []);
 
   function createCard(newCardData: Character) {
-    dispatch(addCardToCardsListState(newCardData));
+    dispatch({
+      type: EActionKind.addCardToCardsListState,
+      payload: newCardData,
+    });
     setIsVisibleCreateFormModal(false);
   }
 
   function sortCardsList(sortBy: string) {
-    if (
-      !state.main.cardsListState.data.results ||
-      state.main.cardsListState.data.results?.length < 2
-    )
-      return;
+    if (!state.cardsListState.data.results || state.cardsListState.data.results?.length < 2) return;
 
     switch (sortBy) {
       case ESortCardsListBy.name:
       case ESortCardsListBy.gender:
       case ESortCardsListBy.status:
-        dispatch(sortCardsListState(sortBy));
+        dispatch({
+          type: EActionKind.sortCardsListState,
+          payload: sortBy,
+        });
         break;
       default:
         return;
@@ -82,7 +91,10 @@ export const HomePage = () => {
       case EShowCardCount.twenty:
       case EShowCardCount.ten:
       case EShowCardCount.five:
-        dispatch(setShowCardCount(count));
+        dispatch({
+          type: EActionKind.setShowCardCount,
+          payload: count,
+        });
         break;
       default:
         return;
@@ -91,8 +103,8 @@ export const HomePage = () => {
 
   async function changePageOfShowedCards(isNextPageBtn: boolean) {
     const newPageDataURL = isNextPageBtn
-      ? state.main.cardsListState.data.info?.next
-      : state.main.cardsListState.data.info?.prev;
+      ? state.cardsListState.data.info?.next
+      : state.cardsListState.data.info?.prev;
 
     if (!newPageDataURL) return;
 
@@ -100,24 +112,26 @@ export const HomePage = () => {
     // const json = await newPageDataResponse.json();
 
     newPageDataResponse.status === 200
-      ? dispatch(
-          setCardsListState({
+      ? dispatch({
+          type: EActionKind.setCardsListState,
+          payload: {
             isLoaded: true,
             data: await newPageDataResponse.json(),
             error: null,
-          })
-        )
-      : dispatch(
-          setCardsListState({
+          },
+        })
+      : dispatch({
+          type: EActionKind.setCardsListState,
+          payload: {
             isLoaded: true,
-            data: state.main.cardsListState.data,
+            data: state.cardsListState.data,
             error: `ERROR! status:${newPageDataResponse.status}, message:${
               newPageDataResponse.statusText
             } + ${newPageDataResponse.text()}`,
-          })
-        );
+          },
+        });
 
-    if (state.main.sortBySelectValue) sortCardsList(state.main.sortBySelectValue);
+    if (state.sortBySelectValue) sortCardsList(state.sortBySelectValue);
   }
 
   return (
@@ -131,7 +145,7 @@ export const HomePage = () => {
         onInputCallBack={onNameSearchInput}
         className={'home-page__search-input'}
         placeholder={'Search by name'}
-        defaultValue={state.main.searchInputValue ?? ''}
+        defaultValue={state.searchInputValue ?? ''}
       />
       <MySelect
         defaultValue={'sort by'}
@@ -140,7 +154,7 @@ export const HomePage = () => {
           { value: ESortCardsListBy.gender, name: ESortCardsListBy.gender },
           { value: ESortCardsListBy.status, name: ESortCardsListBy.status },
         ]}
-        value={state.main.sortBySelectValue || ''}
+        value={state.sortBySelectValue || ''}
         onChange={(value: string): void => sortCardsList(value)}
       />
       <MySelect
@@ -150,26 +164,26 @@ export const HomePage = () => {
           { value: EShowCardCount.ten, name: EShowCardCount.ten },
           { value: EShowCardCount.five, name: EShowCardCount.five },
         ]}
-        value={state.main.showCardCountSelectValue || ''}
+        value={state.showCardCountSelectValue || ''}
         onChange={(value: string): void => changeShowCardCount(value)}
       />
       <hr />
-      {!state.main.cardsListState.isLoaded && <strong>Loading...</strong>}
-      {state.main.cardsListState.error && <strong>{state.main.cardsListState.error}</strong>}
-      {state.main.cardsListState.isLoaded && (
+      {!state.cardsListState.isLoaded && <strong>Loading...</strong>}
+      {state.cardsListState.error && <strong>{state.cardsListState.error}</strong>}
+      {state.cardsListState.isLoaded && (
         <>
           <CardsList
-            dataList={state.main.cardsListState.data.results!}
+            dataList={state.cardsListState.data.results!}
             rootClasses={'homepage__cards-area'}
           />
           <MyButton
-            disabled={!state.main.cardsListState.data.info?.prev}
+            disabled={!state.cardsListState.data.info?.prev}
             onClick={() => changePageOfShowedCards(false)}
           >
             prev page
           </MyButton>
           <MyButton
-            disabled={!state.main.cardsListState.data.info?.next}
+            disabled={!state.cardsListState.data.info?.next}
             onClick={() => changePageOfShowedCards(true)}
           >
             next page

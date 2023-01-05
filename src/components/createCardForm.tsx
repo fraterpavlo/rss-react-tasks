@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { CreateCardFormProps } from '../interfaces/components/createCardForm';
 import classes from 'styles/components/create-card-form.module.css';
 import { FieldValues, useForm } from 'react-hook-form';
-import { TCreateCardFormPayload } from 'interfaces/utils/reducer/reducer';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'utils/reducer/reduxToolKit';
-import { resetCreateCardFormValues, setCreateCardFormValues } from 'utils/reducer/reducer';
+import { EActionKind } from 'interfaces/utils/reducer/reducer';
+import HomePageContext from 'utils/contexts/homePageContext';
 
 const CreateCardForm = ({ create }: CreateCardFormProps) => {
   const {
@@ -40,13 +38,13 @@ const CreateCardForm = ({ create }: CreateCardFormProps) => {
     };
 
     create(newCardData);
-    dispatch(resetCreateCardFormValues());
+    dispatch({
+      type: EActionKind.resetCreateCardFormValues,
+    });
     reset();
   };
 
-  // const { dispatch, state } = useContext(HomePageContext)!;
-  const dispatch = useDispatch();
-  const state = useSelector((state: RootState): RootState => state);
+  const { dispatch, state } = useContext(HomePageContext)!;
 
   return (
     <form className={classes.createCardForm} onSubmit={handleSubmit(onSubmit)}>
@@ -55,10 +53,7 @@ const CreateCardForm = ({ create }: CreateCardFormProps) => {
         <input
           type="text"
           placeholder="name"
-          defaultValue={
-            ((state.main.createCardFormValues! as TCreateCardFormPayload)?.name?.value as string) ||
-            ''
-          }
+          defaultValue={(state.createCardFormValues?.name?.value as string) || ''}
           {...register('name', {
             required: 'Important input',
             maxLength: {
@@ -66,14 +61,15 @@ const CreateCardForm = ({ create }: CreateCardFormProps) => {
               message: '30 letters is max length',
             },
             onBlur: (e: Event) =>
-              dispatch(
-                setCreateCardFormValues({
+              dispatch({
+                type: EActionKind.setCreateCardFormValues,
+                payload: {
                   name: {
                     value: (e.target as HTMLInputElement).value,
                     error: (errors?.name?.message as string) ?? '',
                   },
-                })
-              ),
+                },
+              }),
           })}
         />
       </label>
@@ -81,21 +77,19 @@ const CreateCardForm = ({ create }: CreateCardFormProps) => {
       <label>
         gender:
         <select
-          defaultValue={
-            ((state.main.createCardFormValues! as TCreateCardFormPayload)?.gender
-              ?.value as string) || ''
-          }
+          defaultValue={(state.createCardFormValues?.gender?.value as string) || ''}
           {...register('gender', {
             required: true,
             onBlur: (e: Event) =>
-              dispatch(
-                setCreateCardFormValues({
+              dispatch({
+                type: EActionKind.setCreateCardFormValues,
+                payload: {
                   gender: {
                     value: (e.target as HTMLSelectElement).value,
                     error: (errors?.gender?.message as string) ?? '',
                   },
-                })
-              ),
+                },
+              }),
           })}
         >
           <option value="Female">Female</option>
@@ -110,10 +104,7 @@ const CreateCardForm = ({ create }: CreateCardFormProps) => {
         <input
           type="text"
           placeholder="species"
-          defaultValue={
-            ((state.main.createCardFormValues! as TCreateCardFormPayload)?.species
-              ?.value as string) || ''
-          }
+          defaultValue={(state.createCardFormValues?.species?.value as string) || ''}
           {...register('species', {
             required: 'Important input',
             maxLength: {
@@ -121,14 +112,15 @@ const CreateCardForm = ({ create }: CreateCardFormProps) => {
               message: '30 letters is max length',
             },
             onBlur: (e: Event) =>
-              dispatch(
-                setCreateCardFormValues({
+              dispatch({
+                type: EActionKind.setCreateCardFormValues,
+                payload: {
                   species: {
                     value: (e.target as HTMLInputElement).value,
                     error: (errors?.species?.message as string) ?? '',
                   },
-                })
-              ),
+                },
+              }),
           })}
         />
       </label>
@@ -136,21 +128,19 @@ const CreateCardForm = ({ create }: CreateCardFormProps) => {
       <label>
         status:
         <select
-          defaultValue={
-            ((state.main.createCardFormValues! as TCreateCardFormPayload)?.status
-              ?.value as string) || ''
-          }
+          defaultValue={(state.createCardFormValues?.status?.value as string) || ''}
           {...register('status', {
             required: 'Important input',
             onBlur: (e: Event) =>
-              dispatch(
-                setCreateCardFormValues({
+              dispatch({
+                type: EActionKind.setCreateCardFormValues,
+                payload: {
                   status: {
                     value: (e.target as HTMLSelectElement).value,
                     error: (errors?.status?.message as string) ?? '',
                   },
-                })
-              ),
+                },
+              }),
           })}
         >
           <option value="Dead">Dead</option>
@@ -164,10 +154,7 @@ const CreateCardForm = ({ create }: CreateCardFormProps) => {
         <input
           type="text"
           placeholder="origin"
-          defaultValue={
-            ((state.main.createCardFormValues! as TCreateCardFormPayload)?.origin
-              ?.value as string) || ''
-          }
+          defaultValue={(state.createCardFormValues?.origin?.value as string) || ''}
           {...register('origin', {
             required: 'Important input',
             maxLength: {
@@ -175,14 +162,15 @@ const CreateCardForm = ({ create }: CreateCardFormProps) => {
               message: '30 letters is max length',
             },
             onBlur: (e: Event) =>
-              dispatch(
-                setCreateCardFormValues({
+              dispatch({
+                type: EActionKind.setCreateCardFormValues,
+                payload: {
                   origin: {
                     value: (e.target as HTMLInputElement).value,
                     error: (errors?.origin?.message as string) ?? '',
                   },
-                })
-              ),
+                },
+              }),
           })}
         />
       </label>
@@ -192,10 +180,7 @@ const CreateCardForm = ({ create }: CreateCardFormProps) => {
         <input
           type="text"
           placeholder="location"
-          defaultValue={
-            ((state.main.createCardFormValues! as TCreateCardFormPayload)?.location
-              ?.value as string) || ''
-          }
+          defaultValue={(state.createCardFormValues?.location?.value as string) || ''}
           {...register('location', {
             required: 'Important input',
             maxLength: {
@@ -203,14 +188,15 @@ const CreateCardForm = ({ create }: CreateCardFormProps) => {
               message: '30 letters is max length',
             },
             onBlur: (e: Event) =>
-              dispatch(
-                setCreateCardFormValues({
+              dispatch({
+                type: EActionKind.setCreateCardFormValues,
+                payload: {
                   location: {
                     value: (e.target as HTMLInputElement).value,
                     error: (errors?.location?.message as string) ?? '',
                   },
-                })
-              ),
+                },
+              }),
           })}
         />
       </label>
@@ -220,21 +206,19 @@ const CreateCardForm = ({ create }: CreateCardFormProps) => {
         <input
           type="date"
           placeholder="created"
-          defaultValue={
-            ((state.main.createCardFormValues! as TCreateCardFormPayload)?.created
-              ?.value as string) || ''
-          }
+          defaultValue={(state.createCardFormValues?.created?.value as string) || ''}
           {...register('created', {
             required: true,
             onBlur: (e: Event) =>
-              dispatch(
-                setCreateCardFormValues({
+              dispatch({
+                type: EActionKind.setCreateCardFormValues,
+                payload: {
                   created: {
                     value: (e.target as HTMLInputElement).value,
                     error: (errors?.created?.message as string) ?? '',
                   },
-                })
-              ),
+                },
+              }),
           })}
         />
       </label>
@@ -248,14 +232,16 @@ const CreateCardForm = ({ create }: CreateCardFormProps) => {
           {...register('image', {
             required: 'Important input',
             onBlur: (e: Event) => {
-              dispatch(
-                setCreateCardFormValues({
+              dispatch({
+                type: EActionKind.setCreateCardFormValues,
+                payload: {
                   image: {
                     value: (e.target as HTMLInputElement).files || '',
                     error: (errors?.image?.message as string) ?? '',
                   },
-                })
-              );
+                },
+              }),
+                console.log(e.target);
             },
           })}
         />

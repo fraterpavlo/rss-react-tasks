@@ -21,7 +21,7 @@ function CardsList({ dataList, rootClasses }: CardsListProps) {
     <Link
       className={styles['cards-area__item']}
       key={itemData.id}
-      to={`/fraterpavlo-REACT2022Q3/react-redux/${itemData.id}`}
+      to={`/fraterpavlo-REACT2022Q3/react-custom-app-state/${itemData.id}`}
     >
       <Card cardData={itemData} />
     </Link>

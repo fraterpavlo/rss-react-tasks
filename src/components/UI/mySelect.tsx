@@ -3,8 +3,8 @@ import { IMySelectProps } from '../../interfaces/components/UI/mySelect';
 
 const MySelect = React.forwardRef<HTMLSelectElement, IMySelectProps>((props, ref) => {
   return (
-    <select ref={ref} onChange={(event) => props.onChange(event.target.value)}>
-      <option disabled value={props.defaultValue}>
+    <select ref={ref} onChange={(event) => props.onChange(event.target.value)} value={props.value}>
+      <option disabled value={''}>
         {props.defaultValue}
       </option>
       {props.options.map((option) => (

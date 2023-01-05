@@ -1,11 +1,12 @@
-// import { VoidCallbackType } from 'interfaces/common';
+import { VoidCallbackType } from 'interfaces/common';
 
 export interface IMyInputProps {
+  className: string;
   defaultValue: string;
-  // value: string;
-  onChange?: () => void;
   type: string;
   placeholder?: string;
   required?: boolean;
   accept?: string;
+  onBlur?: VoidCallbackType<React.FocusEvent<HTMLInputElement>>;
+  onKeyPress?: VoidCallbackType<React.KeyboardEvent<HTMLInputElement>>;
 }

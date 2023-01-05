@@ -1,17 +1,6 @@
-export interface ICarData {
-  id: string;
-  brand: string;
-  model: string;
-  country: string;
-  count: string;
-  year: number;
-  type: string;
-  color: string;
-  price: number;
-  electric: boolean;
-  imageSrc?: string;
-}
-
-export interface CardProps {
-  cardData: ICarData;
+import { Character } from 'rickmortyapi/dist/interfaces';
+export interface ICardProps {
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+  cardData: Character;
+  rootClasses?: string;
 }

@@ -1,9 +1,6 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
-
-interface SearchClassProps {
-  passingSearchStateToParent: CallableFunction;
-}
+import { SearchClassProps } from '../interfaces/components/searchClass';
 
 export default class extends React.Component<SearchClassProps> {
   state = {

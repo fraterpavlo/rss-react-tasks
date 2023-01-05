@@ -1,55 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import carsData from '../data.json';
+import SearchClass from 'components/searchClass';
+import CreateCardForm from 'components/createCardForm';
 import CardsList from 'components/cards-list';
 import '../styles/pages/home-page.css';
-import { ICardsDataState } from 'interfaces/pages/homePage';
-import MyLazyTextInput from 'components/UI/myLazyTextInput';
-import { getCharacters } from 'rickmortyapi';
-import { CharacterFilter } from 'rickmortyapi/dist/interfaces';
+import { ICarData } from 'interfaces/pages/homePage';
+export class HomePage extends React.Component {
+  state = {
+    searchCurrentValue: localStorage.getItem('search-value') || '',
+    currentCarsDataList: this.filterCarsDataList(localStorage.getItem('search-value') || ''),
+  };
 
-export const HomePage = () => {
-  const [cardsData, setCardsData] = useState<ICardsDataState>({
-    isLoaded: false,
-    data: null,
-    error: null,
-  });
+  filterCarsDataList(searchValue: string) {
+    const trimValue = searchValue.trim().toLowerCase();
+    let filteredCarsDataList;
+    trimValue !== ''
+      ? (filteredCarsDataList = carsData.filter((itemData) =>
+          `${itemData.brand} ${itemData.model}`.toLowerCase().includes(trimValue)
+        ))
+      : (filteredCarsDataList = carsData);
 
-  async function fetchCharactersData(filters?: CharacterFilter) {
-    const characters = await getCharacters(filters);
-    characters.status === 200
-      ? setCardsData({
-          isLoaded: true,
-          data: characters.data,
-          error: null,
-        })
-      : setCardsData({
-          isLoaded: true,
-          data: null,
-          error: `ERROR! status:${characters.status}, message:${characters.statusMessage}`,
-        });
+    return filteredCarsDataList;
   }
 
-  async function onNameSearchInput(value: string) {
-    await fetchCharactersData({ name: value });
+  onSearchInput(value: string) {
+    this.setState({ SearchCurrentValue: value });
+    this.setState({ currentCarsDataList: this.filterCarsDataList(value) });
   }
 
-  useEffect(() => {
-    fetchCharactersData();
-  }, []);
+  createCard(newCardData: ICarData) {
+    this.setState({ currentCarsDataList: [newCardData, ...this.state.currentCarsDataList] });
+  }
 
-  return (
-    <div className="home-page__container" data-testid="home-page">
-      <hr />
-      <MyLazyTextInput
-        onInputCallBack={onNameSearchInput}
-        className={'home-page__search-input'}
-        placeholder={'введите имя'}
-      />
-      <hr />
-      {!cardsData.isLoaded && <strong>Loading...</strong>}
-      {cardsData.error && <strong>{cardsData.error}</strong>}
-      {cardsData.data && (
-        <CardsList dataList={cardsData.data.results!} rootClasses={'homepage__cards-area'} />
-      )}
-    </div>
-  );
-};
+  render() {
+    return (
+      <div className="home-page__container" data-testid="home-page">
+        <hr />
+        <CreateCardForm create={this.createCard.bind(this)} />
+        <hr />
+        <SearchClass passingSearchStateToParent={this.onSearchInput.bind(this)} />
+        <CardsList dataList={this.state.currentCarsDataList} />
+      </div>
+    );
+  }
+}

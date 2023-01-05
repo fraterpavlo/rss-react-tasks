@@ -1,51 +1,155 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test card test card match snapshot 1`] = `
+exports[`test card tets card match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="card "
-        data-card-id="999"
-        data-testid="cardslist-item"
+        class="cards-area__item card"
+        data-id="test"
       >
         <span
-          class="card__name"
+          class="card__title"
         >
-          Test card name
+          test
+           
+          test
         </span>
         <div
           class="card__img-contain"
         >
           <img
-            alt="card image"
+            alt="car"
             class="card__img"
-            src="https://rickandmortyapi.com/api/character/avatar/361.jpeg"
+            src="./assets/img/cars/test.jpg"
           />
+        </div>
+        <div
+          class="card__type"
+        >
+          Тип кузова:
+          <span
+            class="card__type-output"
+          >
+            test
+          </span>
+        </div>
+        <div
+          class="card__country"
+        >
+          Страна сборки:
+          <span
+            class="card__country-output"
+          >
+            test
+          </span>
+        </div>
+        <div
+          class="card__year"
+        >
+          Год производства:
+          <span
+            class="card__year-output"
+          >
+            9999
+          </span>
+        </div>
+        <div
+          class="card__price"
+        >
+          Цена от:
+          <span
+            class="card__price-output"
+          >
+            999
+             💰
+          </span>
+        </div>
+        <div
+          class="card__electric"
+        >
+          Электрокар:
+          <span
+            class="card__electric-output"
+          >
+            Нет
+          </span>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="card "
-      data-card-id="999"
-      data-testid="cardslist-item"
+      class="cards-area__item card"
+      data-id="test"
     >
       <span
-        class="card__name"
+        class="card__title"
       >
-        Test card name
+        test
+         
+        test
       </span>
       <div
         class="card__img-contain"
       >
         <img
-          alt="card image"
+          alt="car"
           class="card__img"
-          src="https://rickandmortyapi.com/api/character/avatar/361.jpeg"
+          src="./assets/img/cars/test.jpg"
         />
+      </div>
+      <div
+        class="card__type"
+      >
+        Тип кузова:
+        <span
+          class="card__type-output"
+        >
+          test
+        </span>
+      </div>
+      <div
+        class="card__country"
+      >
+        Страна сборки:
+        <span
+          class="card__country-output"
+        >
+          test
+        </span>
+      </div>
+      <div
+        class="card__year"
+      >
+        Год производства:
+        <span
+          class="card__year-output"
+        >
+          9999
+        </span>
+      </div>
+      <div
+        class="card__price"
+      >
+        Цена от:
+        <span
+          class="card__price-output"
+        >
+          999
+           💰
+        </span>
+      </div>
+      <div
+        class="card__electric"
+      >
+        Электрокар:
+        <span
+          class="card__electric-output"
+        >
+          Нет
+        </span>
       </div>
     </div>
   </div>,

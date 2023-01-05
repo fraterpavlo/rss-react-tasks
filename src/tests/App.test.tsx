@@ -9,6 +9,6 @@ test('renders Home link', () => {
       <App />
     </MemoryRouter>
   );
-  const linkElement = screen.getByTestId('home-link');
+  const linkElement = screen.getByText(/Home$/i);
   expect(linkElement).toBeInTheDocument();
 });

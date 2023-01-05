@@ -1,0 +1,7 @@
+.cards-area__container {} 
+
+.cards-area__item {
+  width: calc(25% - 20px);
+  min-height: 250px;
+  max-height: 500px;
+}

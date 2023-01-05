@@ -1,0 +1,35 @@
+.card {
+  animation: lazyRender 1s forwards;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  row-gap: 5px;
+  box-sizing: border-box;
+  padding: 1%;
+  border-radius: 10px;
+  background-color: transparent;
+  font-size: 0.8em;
+  text-align: center;
+  cursor: pointer;
+}
+
+.card__name {}
+
+.card:hover {}
+
+.card__img-contain {
+  width: 100%;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.card__img {
+  max-width: 100%;
+}
+
+
+

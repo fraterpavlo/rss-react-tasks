@@ -1,0 +1,15 @@
+.homepage__container {}
+
+.homepage__textfield {}
+
+.homepage__cards-area {
+  margin-top: 15px;
+  padding: 20px;
+  height:70vh;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  overflow-y: scroll;
+  font-size: 1.5rem;
+}

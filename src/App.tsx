@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <NavLink end to="/" data-testid="home-link">
+        <NavLink end to="/fraterpavlo-REACT2022Q3/react-hooks/" data-testid="home-link">
           Home
         </NavLink>
         <NavLink to="/about" data-testid="about-link">
@@ -17,7 +17,7 @@ function App() {
         </NavLink>
       </header>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/fraterpavlo-REACT2022Q3/react-hooks/" element={<HomePage />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

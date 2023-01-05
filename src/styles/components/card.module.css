@@ -1,0 +1,42 @@
+@keyframes lazyRender {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.card {
+  animation: lazyRender 1s forwards;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  row-gap: 5px;
+  box-sizing: border-box;
+  padding: 1%;
+  border-radius: 10px;
+  background-color: #fff;
+  font-size: 0.8em;
+  text-align: center;
+  box-shadow: 3px -3px 8px 0px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(102%);
+  box-shadow: 5px -5px 8px 0px rgba(0, 0, 0, 0.5);
+}
+
+.card__name {}
+
+.card__img-contain {
+  width: 100%;
+}
+
+.card__img {
+  max-width: 100%;
+}
+
+

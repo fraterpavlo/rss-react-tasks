@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/fraterpavlo-REACT2022Q3/react-api/static/css/main.3051e67c.css",
+    "main.js": "/fraterpavlo-REACT2022Q3/react-api/static/js/main.ef583a1a.js",
+    "static/js/787.e56f57c5.chunk.js": "/fraterpavlo-REACT2022Q3/react-api/static/js/787.e56f57c5.chunk.js",
+    "index.html": "/fraterpavlo-REACT2022Q3/react-api/index.html",
+    "main.3051e67c.css.map": "/fraterpavlo-REACT2022Q3/react-api/static/css/main.3051e67c.css.map",
+    "main.ef583a1a.js.map": "/fraterpavlo-REACT2022Q3/react-api/static/js/main.ef583a1a.js.map",
+    "787.e56f57c5.chunk.js.map": "/fraterpavlo-REACT2022Q3/react-api/static/js/787.e56f57c5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3051e67c.css",
+    "static/js/main.ef583a1a.js"
+  ]
+}

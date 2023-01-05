@@ -78,7 +78,7 @@ Object {
               sorry, data not found
             </strong>
             <button>
-              Close
+              OK
             </button>
           </div>
         </div>
@@ -159,7 +159,7 @@ Object {
             sorry, data not found
           </strong>
           <button>
-            Close
+            OK
           </button>
         </div>
       </div>

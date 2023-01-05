@@ -1,0 +1,208 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test card tets card match snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="cards-area__item card"
+        data-id="test"
+      >
+        <span
+          class="card__title"
+        >
+          test
+           
+          test
+        </span>
+        <div
+          class="card__img-contain"
+        >
+          <img
+            alt="car"
+            class="card__img"
+            src="./assets/img/cars/test.jpg"
+          />
+        </div>
+        <div
+          class="card__type"
+        >
+          Тип кузова:
+          <span
+            class="card__type-output"
+          >
+            test
+          </span>
+        </div>
+        <div
+          class="card__country"
+        >
+          Страна сборки:
+          <span
+            class="card__country-output"
+          >
+            test
+          </span>
+        </div>
+        <div
+          class="card__year"
+        >
+          Год производства:
+          <span
+            class="card__year-output"
+          >
+            9999
+          </span>
+        </div>
+        <div
+          class="card__price"
+        >
+          Цена от:
+          <span
+            class="card__price-output"
+          >
+            999
+             💰
+          </span>
+        </div>
+        <div
+          class="card__electric"
+        >
+          Электрокар:
+          <span
+            class="card__electric-output"
+          >
+            Нет
+          </span>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="cards-area__item card"
+      data-id="test"
+    >
+      <span
+        class="card__title"
+      >
+        test
+         
+        test
+      </span>
+      <div
+        class="card__img-contain"
+      >
+        <img
+          alt="car"
+          class="card__img"
+          src="./assets/img/cars/test.jpg"
+        />
+      </div>
+      <div
+        class="card__type"
+      >
+        Тип кузова:
+        <span
+          class="card__type-output"
+        >
+          test
+        </span>
+      </div>
+      <div
+        class="card__country"
+      >
+        Страна сборки:
+        <span
+          class="card__country-output"
+        >
+          test
+        </span>
+      </div>
+      <div
+        class="card__year"
+      >
+        Год производства:
+        <span
+          class="card__year-output"
+        >
+          9999
+        </span>
+      </div>
+      <div
+        class="card__price"
+      >
+        Цена от:
+        <span
+          class="card__price-output"
+        >
+          999
+           💰
+        </span>
+      </div>
+      <div
+        class="card__electric"
+      >
+        Электрокар:
+        <span
+          class="card__electric-output"
+        >
+          Нет
+        </span>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
